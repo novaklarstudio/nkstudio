@@ -104,7 +104,7 @@
             margin-right: auto;
         }
 
-        /* Header */
+        /* Header - CORREGIDO */
         .header {
             display: flex;
             justify-content: space-between;
@@ -116,15 +116,20 @@
             background: rgba(8, 10, 51, 0.8);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
+            min-height: 70px; /* Altura mínima fija para el header */
         }
 
         .logo-container {
-            width: 130px;
+            width: 80px; /* Reducido de 130px a 80px */
+            height: 40px; /* Altura fija para mantener consistencia */
+            display: flex;
+            align-items: center;
         }
 
         .logo-container img {
             width: 100%;
             height: auto;
+            max-height: 40px; /* Limitar altura máxima */
             /* Filtro para cambiar el color del logo SVG al color solicitado #c51e5d */
             filter: invert(25%) sepia(73%) saturate(3850%) hue-rotate(322deg) brightness(85%) contrast(91%);
         }
@@ -380,10 +385,12 @@
             .header {
                 flex-direction: column;
                 padding: 12px 5%;
+                min-height: auto; /* Permitir que la altura sea flexible en móviles */
             }
 
             .logo-container {
-                width: 120px;
+                width: 70px; /* Ajuste proporcional para móviles */
+                height: 35px;
                 margin-bottom: 10px;
             }
 
