@@ -5,10 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>novaklar studio</title>
 
+    <!-- Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/novaklar/web/main/novaklar1.svg" type="image/svg+xml">
+    
+    <!-- Tipografías personalizadas -->
+    <link rel="preload" href="https://raw.githubusercontent.com/novaklar/web/main/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="https://raw.githubusercontent.com/novaklar/web/main/Poppins-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Comme:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Importar tipografías personalizadas */
+        @font-face {
+            font-family: 'Poppins-Bold';
+            src: url('https://raw.githubusercontent.com/novaklar/web/main/Poppins-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Poppins-Regular';
+            src: url('https://raw.githubusercontent.com/novaklar/web/main/Poppins-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         /* Variables de color para fácil mantenimiento */
         :root {
             --primary-color: #080a33; /* Azul oscuro de novaklar */
@@ -27,7 +49,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins-Regular', sans-serif;
             line-height: 1.6;
             color: var(--text-light);
             background-color: var(--primary-color);
@@ -36,6 +58,7 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            padding-top: 80px; /* AÑADIDO: padding para separar del header fijo */
         }
 
         body::before {
@@ -63,7 +86,7 @@
             color: var(--text-light);
             margin-bottom: 20px;
             text-align: center;
-            font-family: 'Comme', sans-serif;
+            font-family: 'Poppins-Bold', sans-serif; /* ACTUALIZADO: tipografía personalizada */
         }
 
         h1 { font-size: 2.8em; }
@@ -77,12 +100,14 @@
             margin-left: auto;
             margin-right: auto;
             color: var(--text-dark);
+            font-family: 'Poppins-Regular', sans-serif; /* ACTUALIZADO: tipografía personalizada */
         }
 
         a {
             color: var(--accent-color);
             text-decoration: none;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
 
         a:hover {
@@ -104,34 +129,42 @@
             margin-right: auto;
         }
 
-        /* Header - CORREGIDO */
+        /* Header - MEJORADO con posición fixed */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            position: sticky;
+            position: fixed; /* CAMBIADO: de sticky a fixed */
             top: 0;
-            z-index: 100;
-            background: rgba(8, 10, 51, 0.8);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            min-height: 70px; /* Altura mínima fija para el header */
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(8, 10, 51, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            min-height: 70px;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .logo-container {
-            width: 80px; /* Reducido de 130px a 80px */
-            height: 40px; /* Altura fija para mantener consistencia */
+            width: 80px;
+            height: 40px;
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
 
         .logo-container img {
             width: 100%;
             height: auto;
-            max-height: 40px; /* Limitar altura máxima */
-            /* Filtro para cambiar el color del logo SVG al color solicitado #c51e5d */
+            max-height: 40px;
             filter: invert(25%) sepia(73%) saturate(3850%) hue-rotate(322deg) brightness(85%) contrast(91%);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover img {
+            transform: scale(1.05);
         }
 
         .nav-menu {
@@ -144,6 +177,8 @@
             color: var(--text-dark);
             position: relative;
             transition: color 0.3s ease;
+            cursor: pointer;
+            font-family: 'Poppins-Regular', sans-serif; /* ACTUALIZADO: tipografía personalizada */
         }
 
         .nav-menu a::after {
@@ -165,7 +200,7 @@
             color: var(--text-light);
         }
 
-        /* Botón CTA */
+        /* Botón CTA - MEJORADO */
         .cta-button {
             display: inline-block;
             background: linear-gradient(45deg, var(--accent-color), #a01a4e);
@@ -179,6 +214,27 @@
             text-align: center;
             width: 280px;
             margin: 15px 10px;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins-Regular', sans-serif; /* ACTUALIZADO: tipografía personalizada */
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
@@ -187,18 +243,23 @@
             filter: brightness(1.1);
         }
 
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
         .cta-button i {
             margin-left: 8px;
         }
 
-        /* Hero Section */
+        /* Hero Section - CORREGIDO: separación del header */
         .hero-section {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 80px);
+            min-height: calc(100vh - 80px); /* AJUSTADO: considera el padding del body */
             text-align: center;
             padding: 0 15px;
+            margin-top: 0; /* ASEGURADO: sin margen superior adicional */
         }
 
         .hero-content {
@@ -232,6 +293,7 @@
             text-align: left;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
+            cursor: default;
         }
 
         .package-card h3 {
@@ -240,6 +302,7 @@
             text-align: left;
             display: flex;
             align-items: center;
+            font-family: 'Poppins-Bold', sans-serif; /* ACTUALIZADO: tipografía personalizada */
         }
 
         .package-card h3 i {
@@ -258,6 +321,7 @@
             padding-left: 0;
             position: relative;
             color: var(--text-dark);
+            font-family: 'Poppins-Regular', sans-serif; /* ACTUALIZADO: tipografía personalizada */
         }
 
         .package-card ul li::before {
@@ -282,6 +346,7 @@
             font-size: 1.4em;
             font-weight: 700;
             color: var(--text-light);
+            font-family: 'Poppins-Bold', sans-serif; /* ACTUALIZADO: tipografía personalizada */
         }
 
         .package-button {
@@ -293,6 +358,10 @@
             transition: background 0.3s ease, transform 0.3s ease;
             font-size: 0.9em;
             display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            font-family: 'Poppins-Regular', sans-serif; /* ACTUALIZADO: tipografía personalizada */
         }
 
         .package-button:hover {
@@ -300,23 +369,13 @@
             transform: translateY(-2px);
         }
 
+        .package-button:active {
+            transform: translateY(0);
+        }
+
         .package-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Destacado */
-        .package-card.featured {
-            border: 1px solid var(--glass-border) !important;
-            box-shadow: 0 0 40px rgba(197, 30, 93, 0.4), 0 4px 30px rgba(0, 0, 0, 0.1);
-            transform: scale(1.03);
-            position: relative;
-            z-index: 1;
-        }
-
-        .package-card.featured:hover {
-            transform: translateY(-12px) scale(1.05);
-            box-shadow: 0 0 50px rgba(197, 30, 93, 0.6), 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         /* About Section */
@@ -348,6 +407,8 @@
             margin: 0 12px;
             color: var(--text-dark);
             transition: color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
         }
 
         .social-links a:hover {
@@ -359,9 +420,10 @@
         .centered-text {
             text-align: center;
             margin: 15px 0;
+            font-family: 'Poppins-Regular', sans-serif; /* ACTUALIZADO: tipografía personalizada */
         }
 
-        /* Footer - CORREGIDO */
+        /* Footer */
         .footer {
             text-align: center;
             padding: 25px 15px;
@@ -378,6 +440,10 @@
 
         /* Responsive Design - Optimizado para móviles */
         @media (max-width: 768px) {
+            body {
+                padding-top: 70px; /* AJUSTADO: padding menor para móviles */
+            }
+            
             h1 { font-size: 2em; }
             h2 { font-size: 1.7em; }
             h3 { font-size: 1.4em; }
@@ -385,11 +451,11 @@
             .header {
                 flex-direction: column;
                 padding: 12px 5%;
-                min-height: auto; /* Permitir que la altura sea flexible en móviles */
+                min-height: auto;
             }
 
             .logo-container {
-                width: 70px; /* Ajuste proporcional para móviles */
+                width: 70px;
                 height: 35px;
                 margin-bottom: 10px;
             }
@@ -434,9 +500,17 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .hero-section {
+                min-height: calc(100vh - 70px); /* AJUSTADO: para móviles */
+            }
         }
 
         @media (max-width: 480px) {
+            body {
+                padding-top: 65px; /* AJUSTADO: padding menor para móviles pequeños */
+            }
+            
             h1 { font-size: 1.8em; }
             h2 { font-size: 1.5em; }
             h3 { font-size: 1.3em; }
@@ -467,13 +541,17 @@
                 width: 100%;
                 max-width: 280px;
             }
+            
+            .hero-section {
+                min-height: calc(100vh - 65px); /* AJUSTADO: para móviles pequeños */
+            }
         }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="logo-container">
-            <img src="https://raw.githubusercontent.com/novaklar/web/refs/heads/main/novaklar1.svg" alt="novaklar studio logo">
+            <img src="https://raw.githubusercontent.com/novaklar/web/main/novaklar1.svg" alt="novaklar studio logo">
         </div>
         <nav class="nav-menu">
             <a href="#services">Servicios</a>
@@ -506,7 +584,7 @@
                     </ul>
                     <div class="price">
                         <span>Desde $30.000</span>
-                        <a href="https://wa.me/573172280539?text=Hola,%20me%20interesan%20sus%20servicios%20de%20diseño%20personalizado" class="package-button">Más información</a>
+                        <a href="https://wa.me/573172280539?text=Hola,%20me%20interesan%20sus%20servicios%20de%20diseño%20personalizado%20de%20novaklar%20studio" class="package-button">Más información</a>
                     </div>
                 </div>
 
@@ -519,7 +597,7 @@
                     </ul>
                     <div class="price">
                         <span>$50.000</span>
-                        <a href="https://wa.me/573172280539?text=Hola,%20estoy%20interesado%20en%20el%20paquete%20Identidad%20básica" class="package-button">Más información</a>
+                        <a href="https://wa.me/573172280539?text=Hola,%20estoy%20interesado%20en%20el%20paquete%20Identidad%20básica%20de%20novaklar%20studio" class="package-button">Más información</a>
                     </div>
                 </div>
 
@@ -534,7 +612,7 @@
                     </ul>
                     <div class="price">
                         <span>$100.000</span>
-                        <a href="https://wa.me/573172280539?text=Hola,%20estoy%20interesado%20en%20el%20paquete%20Impulso%20de%20marca" class="package-button">Más información</a>
+                        <a href="https://wa.me/573172280539?text=Hola,%20estoy%20interesado%20en%20el%20paquete%20Impulso%20de%20marca%20de%20novaklar%20studio" class="package-button">Más información</a>
                     </div>
                 </div>
 
@@ -549,7 +627,7 @@
                     </ul>
                     <div class="price">
                         <span>$200.000</span>
-                        <a href="https://wa.me/573172280539?text=Hola,%20estoy%20interesado%20en%20el%20paquete%20Branding%20completo" class="package-button">Más información</a>
+                        <a href="https://wa.me/573172280539?text=Hola,%20estoy%20interesado%20en%20el%20paquete%20Branding%20completo%20de%20novaklar%20studio" class="package-button">Más información</a>
                     </div>
                 </div>
             </div>
@@ -569,7 +647,7 @@
                 
                 <div class="contact-buttons">
                     <a href="mailto:novaklar.oficial@gmail.com" class="cta-button">Enviar correo <i class="fas fa-envelope"></i></a>
-                    <a href="https://wa.me/573172280539?text=Hola,%20tengo%20interés%20en%20los%20servicios%20de%20NK%20studio" class="cta-button">WhatsApp <i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/573172280539?text=Hola,%20tengo%20interés%20en%20los%20servicios%20de%20novaklar%20studio" class="cta-button">WhatsApp <i class="fab fa-whatsapp"></i></a>
                 </div>
                 
                 <p class="centered-text">También puedes encontrarnos en Instagram:</p>
